@@ -1,5 +1,4 @@
 package com.company.cardGame.blackJack;
-
 public interface Actor {
     byte HIT = 1;
     byte STAND = 2;
@@ -9,7 +8,8 @@ public interface Actor {
 
     String getName();
     int getBalance();
-    int getBet();
+    int placeBet();
     byte getAction(Hand hand);
+    void addBalance(int amt);
     //byte getAcion(Hand hand, List<Cards> cards) -> card counter version
 }

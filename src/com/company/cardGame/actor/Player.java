@@ -7,6 +7,7 @@ import com.company.cardGame.blackJack.Hand;
 public class Player implements Actor {
     private final String name;
     private int balance = 1000;
+    private int actionsCount;
 
     public Player(String name) {
         this.name = name;
@@ -28,23 +29,29 @@ public class Player implements Actor {
     }
 
     @Override
-    public int getBet() {
-        return Console.getInt(
+    public int placeBet() {
+        int bet = Console.getInt(
                 1,
                 balance,
                 "Enter a bet between 1 and " + balance,
                 "invalid bet"
         );
+        balance -= bet;
+        return bet;
     }
 
-    private String getAvailableActions() {
+    private String getAvailableActions(Hand hand) {
+        actionsCount = 2;
         StringBuilder output = new StringBuilder();
         output.append("0. Quit\n1. Hit\n2. Stand");
-        // TODO: add logic for double
-        // TODO: 1. confirm first turn
-        // TODO: 2. Confirm has enough funds.
-        // TODO: add logic for split
-        // TODO: 3. add logic for split detect pair.
+        if (hand.size() == 2 && balance >= hand.getBet()) {
+            output.append("\n3. Double");
+            actionsCount++;
+            if (hand.canSplit()) {
+                output.append("\n4. Split");
+                actionsCount++;
+            }
+        }
         return output.toString();
     }
 
@@ -53,20 +60,14 @@ public class Player implements Actor {
         //display hand and value
         System.out.println(hand.displayHand());
         System.out.println(hand.getValue());
-        return (byte) Console.getInt(0, 2, getAvailableActions(), "invalid action");
+        return (byte) Console.getInt( 0,
+                actionsCount,
+                getAvailableActions(hand),
+                "invalid action");
     }
 
-    private byte doubleDown(Hand hand) {
-        if (hand.getCardsSize() == 2 && balance > hand.getBet() * 2) {
-        return DOUBLE;
-        }
-        return -1;
+    public void addBalance(int amt) {
+        balance += amt;
     }
 
-    private byte split(Hand hand) {
-        if (hand.getCardsSize() == 2 && hand.hasPair()) {
-            return SPLIT;
-        }
-        return -1;
-    }
 }

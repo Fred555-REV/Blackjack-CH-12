@@ -59,7 +59,7 @@ public class Hand {
     // getting composition methods
     // getter with no setter
     // pass through method
-    public byte getAction(Hand dealer) {
+    public int getAction(Hand dealer) {
         return holder.getAction(this, dealer);
     }
 

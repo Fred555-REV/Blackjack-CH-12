@@ -65,9 +65,7 @@ public class Table {
     private void playerTurns() {
         for (int count = 0; count < hands.size(); count++) {
             Hand player = hands.get(count);
-            while (true) {
-                if (!turn(player)) break;
-            }
+            while (turn(player)) ;
             System.out.println(player.displayHand());
             Console.getString("Enter to start next turn", false);
         }
@@ -104,16 +102,16 @@ public class Table {
 
     private void determineWinner(Hand player) {
         if (player.getValue() > BUST_VALUE) {
-            System.out.println("Player Busted");
+            System.out.printf("%s Busted\n", player.getName());
             return;
         }
         if (player.getValue() > dealer.getValue() || dealer.getValue() > BUST_VALUE) {
-            System.out.println("Player Wins");
+            System.out.printf("%s Wins\n", player.getName());
             player.payout(Hand.NORMALPAY);
             return;
         }
         if (player.getValue() == dealer.getValue()) {
-            System.out.println("Push");
+            System.out.printf("%s Push\n", player.getName());
             player.payout(Hand.PUSHPAY);
             return;
         }
@@ -123,7 +121,7 @@ public class Table {
     private boolean turn(Hand activeHand) {
         System.out.println(dealer.getName() + " " + dealer.displayHand());
         System.out.println(activeHand.getName());
-        byte action = activeHand.getAction(dealer);
+        int action = activeHand.getAction(dealer);
         return switch (action) {
             case Actor.QUIT -> quit();
             case Actor.HIT -> hit(activeHand);

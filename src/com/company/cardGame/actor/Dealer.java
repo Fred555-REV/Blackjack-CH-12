@@ -23,7 +23,7 @@ public class Dealer implements Actor {
     @Override
     public void addBalance(double amt) { return; }
 
-    public byte getAction(Hand hand, Hand dealer) {
+    public int getAction(Hand hand, Hand dealer) {
         return hand.getValue() < STAND_VALUE ? HIT : STAND;
     }
 

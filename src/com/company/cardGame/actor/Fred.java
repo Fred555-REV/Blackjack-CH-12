@@ -34,13 +34,13 @@ public class Fred implements Actor {
         int myValue = hand.getValue();
         int dealerValue = dealer.getValue();
         boolean dealer17 = dealerValue >= 17;
-        if(dealer.getValue()==21){
-            hand.addCard(dealer.removeCard(0));
-            hand.addCard(dealer.removeCard(0));
-            dealer.addCard(hand.removeCard(0));
-            dealer.addCard(hand.removeCard(0));
-            return STAND;
-        }
+//        if(dealer.getValue()==21){
+//            hand.addCard(dealer.removeCard(0));
+//            hand.addCard(dealer.removeCard(0));
+//            dealer.addCard(hand.removeCard(0));
+//            dealer.addCard(hand.removeCard(0));
+//            return STAND;
+//        }
 
         if (myValue >= dealerValue && dealer17) {
             //Instant Win or Push

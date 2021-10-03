@@ -97,6 +97,10 @@ public class Hand {
         }
     }
 
+    public void clear(){
+        cards.removeAll(cards);
+    }
+
     // removeCard method
     public Card removeCard(int index) {
         // take card at index out of hand and return to table.

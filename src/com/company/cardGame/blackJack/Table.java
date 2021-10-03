@@ -2,7 +2,9 @@ package com.company.cardGame.blackJack;
 
 import com.company.Utils.Console;
 import com.company.cardGame.actor.Dealer;
+import com.company.cardGame.actor.Fred;
 import com.company.cardGame.actor.Player;
+import com.company.cardGame.deck.Card;
 import com.company.cardGame.deck.Deck;
 import com.company.cardGame.deck.RiggedDeck;
 import com.company.cardGame.deck.StandardDeck;
@@ -31,6 +33,8 @@ public class Table {
             Player newPlayer = new Player("Player " + (count + 1));
             hands.add(new Hand(newPlayer));
         }
+        hands.add(new Hand(new Fred()));
+        playerCount++;
     }
 
     /* handle split
@@ -75,10 +79,12 @@ public class Table {
         for (Hand player : hands) {
             determineWinner(player);
             System.out.println(player.getBalance());
+            player.clear();
         }
         while (hands.size() > playerCount) {
             hands.remove(hands.size() - 1);
         }
+        dealer.clear();
     }
 
     private void displayTable() {

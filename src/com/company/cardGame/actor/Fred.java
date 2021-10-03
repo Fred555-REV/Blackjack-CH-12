@@ -20,8 +20,8 @@ public class Fred implements Actor {
     @Override
     public int placeBet() {
         int bet;
-        if(balance > 100){
-            bet = (int) Math.floor(Math.random() * balance/2)+1;
+        if (balance > 100) {
+            bet = (int) Math.floor(Math.random() * balance / 2) + 1;
         } else {
             bet = (int) Math.ceil(balance / 2.0);
         }
@@ -34,18 +34,22 @@ public class Fred implements Actor {
         int myValue = hand.getValue();
         int dealerValue = dealer.getValue();
         boolean dealer17 = dealerValue >= 17;
-//        if(dealer.getValue()==21){
-//            hand.addCard(dealer.removeCard(0));
-//            hand.addCard(dealer.removeCard(0));
-//            dealer.addCard(hand.removeCard(0));
-//            dealer.addCard(hand.removeCard(0));
-//            return STAND;
-//        }
+
+        if (myValue >= 17 && dealerValue > myValue) {
+            // no removal of cards if cardcount is 2.
+
+            hand.addCard(dealer.removeCard(0));
+            hand.addCard(dealer.removeCard(0));
+            dealer.addCard(hand.removeCard(0));
+            dealer.addCard(hand.removeCard(0));
+            return STAND;
+        }
 
         if (myValue >= dealerValue && dealer17) {
             //Instant Win or Push
             //Dealer 17-21
             //Me 17-21
+            hand.doubleBet();
             hand.doubleBet();
             return STAND;
         }

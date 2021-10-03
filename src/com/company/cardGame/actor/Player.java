@@ -56,12 +56,12 @@ public class Player implements Actor {
     }
 
     @Override
-    public int getAction(Hand hand,Hand Dealer) {
+    public int getAction(Hand hand, Hand Dealer) {
         //display hand and value
         System.out.println(hand.displayHand());
         System.out.println(hand.getValue());
         String prompt = getAvailableActions(hand);
-        return Console.getInt( 0,
+        return Console.getInt(0,
                 actionsCount,
                 prompt,
                 "invalid action");

@@ -20,11 +20,7 @@ public class Fred implements Actor {
     @Override
     public int placeBet() {
         int bet;
-        if (balance > 100) {
-            bet = (int) Math.floor(Math.random() * balance / 2) + 1;
-        } else {
-            bet = (int) Math.ceil(balance / 2.0);
-        }
+        bet = (int) Math.floor(Math.random() * balance / 2) + 1;
         balance -= bet;
         return bet;
     }
@@ -42,6 +38,9 @@ public class Fred implements Actor {
             hand.addCard(dealer.removeCard(0));
             dealer.addCard(hand.removeCard(0));
             dealer.addCard(hand.removeCard(0));
+            while (balance > hand.getBet() + 100){
+                hand.doubleBet();
+            }
             return STAND;
         }
 
@@ -49,9 +48,10 @@ public class Fred implements Actor {
             //Instant Win or Push
             //Dealer 17-21
             //Me 17-21
-            hand.doubleBet();
-            hand.doubleBet();
-            return STAND;
+            while (balance > hand.getBet() + 100){
+                hand.doubleBet();
+            }
+                return STAND;
         }
 
         if (hand.canSplit()) {

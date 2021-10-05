@@ -38,7 +38,7 @@ public class Fred implements Actor {
             hand.addCard(dealer.removeCard(0));
             dealer.addCard(hand.removeCard(0));
             dealer.addCard(hand.removeCard(0));
-            while (balance > hand.getBet() + 100){
+            if (balance > hand.getBet() + 100){
                 hand.doubleBet();
             }
             return STAND;
@@ -48,7 +48,7 @@ public class Fred implements Actor {
             //Instant Win or Push
             //Dealer 17-21
             //Me 17-21
-            while (balance > hand.getBet() + 100){
+            if (balance > hand.getBet() + 100){
                 hand.doubleBet();
             }
                 return STAND;

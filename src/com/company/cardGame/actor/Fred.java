@@ -54,7 +54,7 @@ public class Fred implements Actor {
                 return STAND;
         }
 
-        if (hand.canSplit()) {
+        if (balance >= hand.getBet() && hand.canSplit()) {
             return SPLIT;
         }
 

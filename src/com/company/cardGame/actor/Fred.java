@@ -20,7 +20,11 @@ public class Fred implements Actor {
     @Override
     public int placeBet() {
         int bet;
-        bet = (int) Math.floor(Math.random() * balance / 2) + 1;
+        if(balance>200) {
+            bet = (int) Math.floor(Math.random() * balance / 4) + 1;
+        } else {
+            bet = (int) Math.floor(Math.random() * balance / 2) + 1;
+        }
         balance -= bet;
         return bet;
     }
